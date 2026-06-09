@@ -1,1 +1,22 @@
-/venv
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment secrets (if you missed any variations)
+.env
+.env.local
+*.env
+
+# Python bytecode caching
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development database
+db.sqlite3
+db.sqlite3-journal
+
+# Django collected static files (generated in production)
+/staticfiles/
