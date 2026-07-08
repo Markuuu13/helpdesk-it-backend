@@ -24,7 +24,8 @@ class LoginView(APIView):
         }, status=status.HTTP_200_OK)
         
 class SignupView(PublicAPIView):
-
+    permission_classes = [AllowAny]
+    
     def post(self, request):
         serializer = SignupSerializer(data=request.data)
         if not serializer.is_valid():
