@@ -1,7 +1,6 @@
 from rest_framework.views import APIView, Response
 from rest_framework.permissions import AllowAny
 from rest_framework import status
-from helpdesk_auth.configs.custom_managers import PublicAPIView
 from helpdesk_auth.models import Users
 from helpdesk_auth.serializers.user_serializer import LoginSerializer, SignupSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -23,7 +22,7 @@ class LoginView(APIView):
             "refresh": str(refresh),
         }, status=status.HTTP_200_OK)
         
-class SignupView(PublicAPIView):
+class SignupView(APIView):
     permission_classes = [AllowAny]
     
     def post(self, request):
