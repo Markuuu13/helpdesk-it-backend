@@ -1,5 +1,3 @@
-
-
 from django.urls import include, path
 
 from helpdesk.api.ticket import TicketDetailView, TicketListView
