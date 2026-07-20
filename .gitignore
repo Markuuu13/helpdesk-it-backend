@@ -9,9 +9,11 @@ ENV/
 .env.local
 *.env
 
-# Python bytecode caching
+# Python cache
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 *$py.class
 
 # Local development database
