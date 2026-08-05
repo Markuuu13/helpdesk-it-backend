@@ -1,16 +1,17 @@
 from django.db import models
 
 from helpdesk_auth.configs.custom_managers import ActiveManager, AllManager
-from helpdesk_auth.mixins import SoftDeleteMixin
+from helpdesk_auth.mixins import SoftDeleteMixin, UpdateMixin
 from helpdesk_auth.models import Users
 
 # Create your models here.
-class Ticket(SoftDeleteMixin):
+class Ticket(SoftDeleteMixin, UpdateMixin):
     STATUS_CHOICES = [
         ('open', 'Open'),
         ('in_progress', 'In Progress'),
         ('resolved', 'Resolved'),
-        ('closed', 'Closed')
+        ('closed', 'Closed'),
+        ('deleted', 'Deleted')
     ]
     ticket_number = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=200)
