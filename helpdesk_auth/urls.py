@@ -1,9 +1,10 @@
 from django.urls import include, path
 
-from helpdesk_auth.api.user_view import LoginView, SignupView
+from helpdesk_auth.api.user_view import LoginView, SignupView, UserProfileView
 
 
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
-    path('signup/', SignupView.as_view(), name='signup')
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('profile/', UserProfileView.as_view(), name='profile')
 ]

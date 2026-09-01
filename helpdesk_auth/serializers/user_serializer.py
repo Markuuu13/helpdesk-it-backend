@@ -15,10 +15,6 @@ class LoginSerializer(serializers.ModelSerializer):
             'password': {'write_only': True}
         }
 
-    def create(self, validated_data):
-        validated_data['password'] = make_password(validated_data['password'])
-        return super().create(validated_data)
-
     def validate_username(self, value):
         if value is None or value.strip() == "":
             raise serializers.ValidationError("Username cannot be empty.")
@@ -90,3 +86,8 @@ class SignupSerializer(serializers.ModelSerializer):
         validated_data['password'] = make_password(validated_data['password'])
         validated_data['name'] = f"{validated_data['first_name']} {validated_data['last_name']}"
         return super().create(validated_data)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ['first_name', 'last_name', 'name', 'role', 'email', 'is_active']

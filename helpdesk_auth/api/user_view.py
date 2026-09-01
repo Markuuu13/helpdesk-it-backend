@@ -2,8 +2,9 @@ from rest_framework.views import APIView, Response
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 from helpdesk_auth.models import Users
-from helpdesk_auth.serializers.user_serializer import LoginSerializer, SignupSerializer
+from helpdesk_auth.serializers.user_serializer import LoginSerializer, SignupSerializer, UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
 
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -32,3 +33,12 @@ class SignupView(APIView):
 
         serializer.save()
         return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+    
+class UserProfileView(APIView):
+    
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
