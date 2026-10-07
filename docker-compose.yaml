@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: .
+    ports:
+      - '9000:9000'
+    command: >
+      sh -c "python manage.py migrate && 
+            python manage.py runserver 0.0.0.0:9000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  postgres_data:

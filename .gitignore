@@ -6,8 +6,10 @@ ENV/
 
 # Environment secrets (if you missed any variations)
 .env
+.env.example
 .env.local
 *.env
+
 
 # Python cache
 __pycache__/
