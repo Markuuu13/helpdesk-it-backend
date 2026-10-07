@@ -22,6 +22,7 @@ class Ticket(SoftDeleteMixin, UpdateMixin):
     assigned_to = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_tickets')
     asset = models.CharField(max_length=100, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
+    priority = models.CharField(max_length=20, null=True, blank=True)
     
     objects = ActiveManager()
     all_objects = AllManager()

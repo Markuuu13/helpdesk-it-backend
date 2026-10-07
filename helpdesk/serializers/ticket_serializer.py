@@ -15,7 +15,8 @@ class TicketListSerializer(serializers.ModelSerializer):
             'created_by',
             'created_at',
             'asset',
-            'status'
+            'status',
+            'priority',
         ]
 
 class TicketDetailSerializer(serializers.ModelSerializer):
@@ -30,6 +31,7 @@ class TicketCreateSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'asset',
+            'priority',
         ]
         
     def create(self, validated_data):
