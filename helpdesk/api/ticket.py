@@ -39,6 +39,7 @@ class TicketDetailView(APIView):
 class TicketView(APIView):
     permission_classes = [IsAuthenticated]
 
+    # Create Ticket
     def post(self, request):
         serializer = TicketCreateSerializer(data=request.data)
         if serializer.is_valid():
@@ -46,6 +47,7 @@ class TicketView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    # Delete Ticket
     def delete(self, request, ticket_number):
         try:
             ticket = Ticket.objects.get(ticket_number=ticket_number)
