@@ -13,6 +13,14 @@ class Ticket(SoftDeleteMixin, UpdateMixin):
         ('closed', 'Closed'),
         ('deleted', 'Deleted')
     ]
+    
+    PRIORITY_CHOICES = [
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High'),
+        ('critical', 'Critical')
+    ]
+    
     ticket_number = models.CharField(max_length=20, unique=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -22,6 +30,7 @@ class Ticket(SoftDeleteMixin, UpdateMixin):
     assigned_to = models.ForeignKey(Users, on_delete=models.SET_NULL, null=True, blank=True, related_name='assigned_tickets')
     asset = models.CharField(max_length=100, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, null=True, blank=True)
     
     objects = ActiveManager()
     all_objects = AllManager()
