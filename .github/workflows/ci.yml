@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_DB: helpdesk_db
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres123
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -25,12 +25,13 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      SECRET_KEY: ci-test-key
+      SECRET_KEY: ${{ secrets.CI_KEY}}
       DEBUG: 'True'
       ALLOWED_HOSTS: 'localhost'
       POSTGRES_DB: helpdesk_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
 
     steps:
