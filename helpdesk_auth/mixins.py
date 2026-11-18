@@ -22,6 +22,7 @@ class SoftDeleteMixin(models.Model):
     def restore(self, *args, **kwargs):
         self.deleted_at = None
         self.is_deleted = False
+        self.status = 'open'
         self.save()
 
 class UpdateMixin(models.Model):
