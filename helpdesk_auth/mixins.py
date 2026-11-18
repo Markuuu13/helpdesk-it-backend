@@ -33,12 +33,15 @@ class UpdateMixin(models.Model):
     
     def in_progress_status(self, *args, **kwargs):
         self.status = 'in_progress'
+        self.updated_by = kwargs.get('updated_by', None)
         self.save()
     
     def resolved_status(self, *args, **kwargs):
-            self.status = 'resolved'
-            self.save()
+        self.status = 'resolved'
+        self.updated_by = kwargs.get('updated_by', None)
+        self.save()
     
     def closed_status(self, *args, **kwargs):
-            self.status = 'closed'
-            self.save()
+        self.status = 'closed'
+        self.updated_by = kwargs.get('updated_by', None)
+        self.save()

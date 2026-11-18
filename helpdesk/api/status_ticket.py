@@ -20,7 +20,7 @@ class CloseTicketView(APIView):
         serializer = TicketDetailSerializer(ticket, many=False)
         
         if user.role == 'admin' or user.role == 'agent':
-            ticket.closed_status()
+            ticket.closed_status(updated_by=user)
             return Response({"message": "Ticket closed.", "data": serializer.data}, status=status.HTTP_200_OK)
         
         return Response({"message": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
@@ -39,7 +39,7 @@ class InProgressTicketView(APIView):
         serializer = TicketDetailSerializer(ticket, many=False)
         
         if user.role == 'admin' or user.role == 'agent':
-            ticket.in_progress_status()
+            ticket.in_progress_status(updated_by=user)
             return Response({"message": "Ticket marked as in progress.", "data": serializer.data}, status=status.HTTP_200_OK)
         
         return Response({"message": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
@@ -58,7 +58,7 @@ class ResolvedTicketView(APIView):
         serializer = TicketDetailSerializer(ticket, many=False)
         
         if user.role == 'admin' or user.role == 'agent':
-            ticket.resolved_status()
+            ticket.resolved_status(updated_by=user)
             return Response({"message": "Ticket marked as resolved.", "data": serializer.data}, status=status.HTTP_200_OK)
         
         return Response({"message": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
@@ -77,7 +77,7 @@ class ClosedTicketView(APIView):
         serializer = TicketDetailSerializer(ticket, many=False)
         
         if user.role == 'admin' or user.role == 'agent':
-            ticket.closed_status()
+            ticket.closed_status(updated_by=user)
             return Response({"message": "Ticket marked as closed.", "data": serializer.data}, status=status.HTTP_200_OK)
         
         return Response({"message": "Permission denied."}, status=status.HTTP_403_FORBIDDEN)
